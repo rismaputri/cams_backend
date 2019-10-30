@@ -13,7 +13,14 @@ def customer_csv(request):
 
     writer.writerow(['Nama','Gaji','Jenis Kelamin','Existing','Occupation','Alamat','Kendaraan'])
     for customer in customer:
+        kendaraan = ''
+        customer_kendaraan = customer.kendaraan.all()
+
+        for ck in customer_kendaraan:
+            kendaraan = ck.nama + ',' + kendaraan
+
+        kendaraan = kendaraan[:-1]
         writer.writerow([customer.nama, customer.gaji, customer.jk, customer.existing , customer.occupation,
-                         customer.alamat, customer.kendaraan])
+                         customer.alamat, kendaraan])
 
     return response
